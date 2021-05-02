@@ -14,7 +14,7 @@ plugin_package = "octoprint_gitfiles"
 plugin_name = "GitFiles"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "1.1.5"
+plugin_version = "1.1.5_t3d_2"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
@@ -27,7 +27,7 @@ plugin_author = "OutsourcedGuru"
 plugin_author_email = "support@outsourced.guru"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/OutsourcedGuru/OctoPrint-GitFiles"
+plugin_url = "https://github.com/tideline3d/OctoPrint-GitFiles"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "MIT"
