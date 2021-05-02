@@ -76,7 +76,7 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
 		if not os.path.isdir(gitfilesFolder):
 			try:
 				self._logger.info("Creating the new `{}` subfolder...".format(gitfilesFolder))
-				os.mkdir(gitfilesFolder, 0755)
+				os.mkdir(gitfilesFolder, 0o0755)
 				self._logger.info("Created")
 			except OSError as e:
 				self._logger.info("Subfolder creation failed")
