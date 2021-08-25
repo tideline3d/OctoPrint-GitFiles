@@ -7,9 +7,14 @@ import octoprint.plugin
 import os
 
 class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
-                     octoprint.plugin.AssetPlugin,
-										 octoprint.plugin.SimpleApiPlugin,
-                     octoprint.plugin.TemplatePlugin):
+                    octoprint.plugin.AssetPlugin,
+					octoprint.plugin.SimpleApiPlugin,
+                    octoprint.plugin.TemplatePlugin,
+					octoprint.plugin.EventHandlerPlugin):
+	def on_event(self, event, payload, *args, **kwargs):
+		if event in [Events.PRINT_DONE, Events.STARTUP, Events.CLIENT_OPENED]:
+			self._logger.info("Refreshing GitFiles data from event: {}.".format(event))
+			self.on_api_command("git", "pull")
 
 	def get_settings_defaults(self):
 		return dict(url="https://github.com/YourUserID/YourRepository.git", path="gitfiles")
@@ -42,7 +47,7 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
 			uploads = self._settings.global_get_basefolder("uploads")
 			path =    self._settings.get(["path"])
 			url =     self._settings.get(["url"])
-			verb =    "{arg1}".format(**data)
+			verb =    "pull"
 			
 			if path == "" or path == "uploads":
 				gitfilesFolder = uploads
