@@ -5,6 +5,7 @@ from subprocess import call
 from octoprint.settings import settings, valid_boolean_trues
 import octoprint.plugin
 import os
+from octoprint.events import Events
 
 class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.AssetPlugin,
