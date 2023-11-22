@@ -48,7 +48,7 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
 			uploads = self._settings.global_get_basefolder("uploads")
 			path =    self._settings.get(["path"])
 			url =     self._settings.get(["url"])
-			verb =    "pull --depth=1 --rebase"
+			verb =    "pull"
 			
 			if path == "" or path == "uploads":
 				gitfilesFolder = uploads
@@ -70,7 +70,7 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
 			# This one runs regardless of whether or not it's been previously initialized
 			try:
 				self._logger.info("-- git {} origin master ---------------------------------------------------".format(verb))
-				output =  call(["git", verb, "origin", "master"], cwd=gitfilesFolder)
+				output =  call(["git", verb, "--depth=1", "--rebase", "origin", "master"], cwd=gitfilesFolder)
 				self._logger.info("git returned: " + str(output))
 				self._logger.info("-- (end of git {}) --------------------------------------------------------".format(verb))
 			except OSError as e:
