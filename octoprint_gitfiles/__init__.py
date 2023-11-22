@@ -48,7 +48,7 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
 			uploads = self._settings.global_get_basefolder("uploads")
 			path =    self._settings.get(["path"])
 			url =     self._settings.get(["url"])
-			verb =    "pull"
+			verb =    "pull --depth=1 --rebase"
 			
 			if path == "" or path == "uploads":
 				gitfilesFolder = uploads
