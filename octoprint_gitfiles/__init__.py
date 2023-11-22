@@ -1,7 +1,7 @@
 # coding=utf-8
 from __future__ import absolute_import
 from subprocess import check_output
-from subprocess import call
+from subprocess import Popen
 from octoprint.settings import settings, valid_boolean_trues
 import octoprint.plugin
 import os
@@ -59,7 +59,7 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
 			# or not it's been initialized before
 			try:
 				self._logger.info("Testing the indicated `{}` folder...".format(gitfilesFolder))
-				output =  call(["git", "remote", "get-url", "origin"], cwd=gitfilesFolder)
+				output =  Popen(["git", "remote", "get-url", "origin"], cwd=gitfilesFolder)
 				if output > 0:
 					self.init(output, gitfilesFolder, url)
 			except OSError as e:
@@ -70,7 +70,7 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
 			# This one runs regardless of whether or not it's been previously initialized
 			try:
 				self._logger.info("-- git {} origin master ---------------------------------------------------".format(verb))
-				output =  call(["git", verb, "origin", "master"], cwd=gitfilesFolder)
+				output =  Popen(["git", verb, "origin", "master"], cwd=gitfilesFolder)
 				self._logger.info("git returned: " + str(output))
 				self._logger.info("-- (end of git {}) --------------------------------------------------------".format(verb))
 			except OSError as e:
@@ -89,14 +89,14 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
 				return
 		try:
 			self._logger.info("Initializing...")
-			output =  call(["git", "init"], cwd=gitfilesFolder)
+			output =  Popen(["git", "init"], cwd=gitfilesFolder)
 			self._logger.info(output)
 		except OSError as e:
 			self._logger.info("`git init` failed")
 			return
 		try:
 			self._logger.info("Setting up the remote origin for master...")
-			output =  call(["git", "remote", "add", "origin", url], cwd=gitfilesFolder)
+			output =  Popen(["git", "remote", "add", "origin", url], cwd=gitfilesFolder)
 			self._logger.info(output)
 		except OSError as e:
 			self._logger.info("`git add remote origin` failed")
