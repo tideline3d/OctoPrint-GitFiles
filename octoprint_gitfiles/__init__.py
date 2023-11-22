@@ -13,7 +13,7 @@ class GitfilesPlugin(octoprint.plugin.SettingsPlugin,
                     octoprint.plugin.TemplatePlugin,
 					octoprint.plugin.EventHandlerPlugin):
 	def on_event(self, event, payload, *args, **kwargs):
-		if event in [Events.PRINT_DONE, Events.STARTUP, Events.CLIENT_OPENED]:
+		if event in [Events.PRINT_DONE, Events.STARTUP, Events.USER_LOGGED_IN]:
 			self._logger.info("Refreshing GitFiles data from event: {}.".format(event))
 			self.on_api_command("git", "pull")
 
